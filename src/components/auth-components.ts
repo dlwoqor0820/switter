@@ -25,6 +25,7 @@ export const Form = styled.form`
 export const Input = styled.input`
   padding: 10px 20px;
   border-radius: 50px;
+  margin-top: 10px;
   border: none;
   width: 100%;
   font-size: 16px;
@@ -46,4 +47,21 @@ export const Switcher = styled.span`
   a {
     color: #1d9bf0;
   }
+`;
+
+export const Button = styled.span`
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-color: white;
+  font-weight: 600;
+  width: 100%;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 0;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 `;

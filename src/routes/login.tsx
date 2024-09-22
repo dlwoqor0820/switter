@@ -12,6 +12,7 @@ import {
   Form,
 } from "../components/auth-components";
 import GithubButton from "../components/github-button";
+import FindPassword from "../components/find-password";
 
 export default function CreateAccount() {
   const navigate = useNavigate();
@@ -76,6 +77,7 @@ export default function CreateAccount() {
         <Link to="/create-account">Create one &rarr;</Link>
       </Switcher>
       <GithubButton />
+      <FindPassword />
     </Wrapper>
   );
 }
