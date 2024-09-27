@@ -3,6 +3,8 @@ import { ITweet } from "./timeline";
 import { auth, db, storage } from "../firebase";
 import { deleteDoc, doc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
+import { useState } from "react";
+import EditModal from "./edit-modal";
 
 const Wrapper = styled.div`
   display: grid;
@@ -35,6 +37,8 @@ const Payload = styled.p`
 const DeleteButton = styled.button`
   background-color: tomato;
   color: white;
+  width: 70px;
+  height: 30px;
   font-weight: 600;
   border: 0;
   font-size: 12px;
@@ -44,7 +48,23 @@ const DeleteButton = styled.button`
   cursor: pointer;
 `;
 
+const EditButton = styled.button`
+  background-color: orange;
+  color: white;
+  width: 70px;
+  height: 30px;
+  font-weight: 600;
+  border: 0;
+  margin-left: 10px;
+  font-size: 12px;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  cursor: pointer;
+`;
+
 export default function Tweet({ username, photo, tweet, userId, id }: ITweet) {
+  const [isOpen, setIsOpen] = useState(false);
   const user = auth.currentUser;
   const onDelete = async () => {
     const ok = confirm("Are you sure you want to delete this tweet?");
@@ -61,14 +81,28 @@ export default function Tweet({ username, photo, tweet, userId, id }: ITweet) {
     } finally {
     }
   };
+
+  const props = {
+    isOpen: isOpen,
+    Id: id,
+    user: user,
+    tweet: tweet,
+    photo: photo,
+  };
+
   return (
     <Wrapper>
       <Column>
         <Username>{username}</Username>
         <Payload>{tweet}</Payload>
         {user?.uid === userId ? (
-          <DeleteButton onClick={onDelete}>Delete</DeleteButton>
+          <div>
+            <DeleteButton onClick={onDelete}>Delete</DeleteButton>
+            <EditButton onClick={() => setIsOpen(!isOpen)}>Edit</EditButton>
+            {isOpen ? <EditModal {...props} /> : null}
+          </div>
         ) : null}
+
         {/* Make Edit button for text&photo */}
       </Column>
       <Column>{photo ? <Photo src={photo} /> : null}</Column>
