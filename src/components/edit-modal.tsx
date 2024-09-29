@@ -10,7 +10,7 @@ import {
   Form,
 } from "./auth-components";
 import { db, storage } from "../firebase";
-import { collection, doc, runTransaction, updateDoc } from "firebase/firestore";
+import { doc, runTransaction, updateDoc } from "firebase/firestore";
 import {
   deleteObject,
   getDownloadURL,
